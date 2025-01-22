@@ -4,16 +4,26 @@ body {
 }
 
 
+.go-up-side{
+    background-color: rgba(0, 0, 0, 0.406);
+    padding: .5rem;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.go-up-side.hide {
+    display: none;
+}
 
 .search-bar {
     margin: 0 auto;
     border: none;
     outline: none;
-    margin-left: 1rem;
     width: 40%;
     height: 2rem;
     border-bottom: 0.1rem solid black;
-    padding-left: 1rem;
+    padding-left: .1rem;
 }
 
 .cards {
@@ -100,9 +110,9 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
+/* 
 @media(max-width:450px) {
     .cards {
         grid-template-columns: repeat(1, 1fr);
     }
-}
+} */

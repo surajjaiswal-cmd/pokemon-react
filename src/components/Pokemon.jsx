@@ -6,6 +6,7 @@ export function Pokemon() {
   const [pokemonData, setPokemonData] = useState([]);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
+  const [gotop, setGotop] = useState(true);
   const api = "https://pokeapi.co/api/v2/pokemon?limit=80";
 
   useEffect(() => {
@@ -35,10 +36,19 @@ export function Pokemon() {
     fetchData();
   }, []);
 
+  window.onscroll = function () {
+    if (window.pageYOffset > 300) {
+      setGotop(false);
+    }
+    else {
+      setGotop(true);
+    }
+  };
+
   const filteredPokemon = pokemonData.filter((pokemon) =>
     pokemon.name.includes(search)
   );
-  
+
   if (error) {
     return (
       <>
@@ -55,31 +65,38 @@ export function Pokemon() {
     if (!filteredPokemon.length)
       return <h3 className="container text-center mt-5">NOT FOUND</h3>;
   }
-  
+
   return (
-    <div className="container">
-      <h1 className="text-center mt-3">
-        <b>Pokemon</b>
-      </h1>
+    <div>
+      <button className={`btn go-up-side ${gotop ? "hide" : ""}`}>
+        <a href="#">
+          <i class="fa-solid fa-arrow-up"></i>
+        </a>
+      </button>
+      <div className="container">
+        <h1 className="text-center mt-3">
+          <b>Pokemon</b>
+        </h1>
 
-      <div className="text-center py-4">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="Search Pokemon"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-
-      <ul className="container">
-        <div className="cards">
-          {filteredPokemon.map((currPokemon) => (
-            <PokemonInfo key={currPokemon.id} currPokemon={currPokemon} />
-          ))}
+        <div className="text-center py-4">
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search Pokemon"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
-        {notFoundError()}
-      </ul>
+
+        <ul className="container">
+          <div className="cards">
+            {filteredPokemon.map((currPokemon) => (
+              <PokemonInfo key={currPokemon.id} currPokemon={currPokemon} />
+            ))}
+          </div>
+          {notFoundError()}
+        </ul>
+      </div>
     </div>
   );
 }
