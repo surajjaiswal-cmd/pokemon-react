@@ -39,15 +39,15 @@ export function Pokemon() {
   window.onscroll = function () {
     if (window.pageYOffset > 300) {
       setGotop(false);
-    }
-    else {
+    } else {
       setGotop(true);
     }
   };
 
-  const filteredPokemon = pokemonData.filter((pokemon) =>
-    pokemon.name.includes(search)
-  );
+const filteredPokemon = pokemonData.filter((pokemon) =>
+  pokemon.name.toLowerCase().includes(search.toLowerCase())
+);
+
 
   if (error) {
     return (
@@ -63,17 +63,17 @@ export function Pokemon() {
 
   function notFoundError() {
     if (!filteredPokemon.length)
-      return <h3 className="container text-center mt-5">NOT FOUND</h3>;
+      return <h3 className="container text-center mt-5">Not Found</h3>;
   }
 
   return (
     <div>
-      <button className={`btn go-up-side ${gotop ? "hide" : ""}`}>
-        <a href="#">
-          <i class="fa-solid fa-arrow-up"></i>
-        </a>
-      </button>
-      <div className="container">
+      <a href="#">
+        <button className={`btn go-up-side ${gotop ? "hide" : ""}`}>
+          <i className="fa-solid fa-arrow-up"></i>
+        </button>{" "}
+      </a>
+      <div className="container-fluid">
         <h1 className="text-center mt-3">
           <b>Pokemon</b>
         </h1>
