@@ -44,14 +44,13 @@ body {
     background-color: #ffffff;
     border-radius: 0.2rem;
     text-align: center;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .card-info:hover {
     transform: scale(1.05);
     box-shadow: 0rem 0rem 2rem rgba(0, 0, 0, 0.473);
 }
-
 .img-folder {
     width: 100%;
     height: 60%;
