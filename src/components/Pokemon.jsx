@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import { PokemonInfo } from "./PokemonInfo";
+
 import "./Pokemon.css";
+import { TotalOrSort } from "./totalOrSort";
 
 export function Pokemon() {
   const [pokemonData, setPokemonData] = useState([]);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [gotop, setGotop] = useState(true);
-  const api = "https://pokeapi.co/api/v2/pokemon?limit=80";
+  const api = "https://pokeapi.co/api/v2/pokemon?limit=200";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let res = await fetch(api);
         let data = await res.json();
-        // got another API in API fetching it by nesting
         let detailedResponse = data.results.map(async (currPokemon) => {
           try {
             let res = await fetch(currPokemon.url);
@@ -24,7 +24,6 @@ export function Pokemon() {
             console.log(error);
           }
         });
-        // got promises so we use promises constructor to get all data
         const detailedPokemonData = await Promise.all(detailedResponse);
         setPokemonData(detailedPokemonData);
       } catch (error) {
@@ -44,9 +43,9 @@ export function Pokemon() {
     }
   };
 
-const filteredPokemon = pokemonData.filter((pokemon) =>
-  pokemon.name.toLowerCase().includes(search.toLowerCase())
-);
+  const filteredPokemon = pokemonData.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(search.toLowerCase())
+  );
 
 
   if (error) {
@@ -61,10 +60,6 @@ const filteredPokemon = pokemonData.filter((pokemon) =>
     return <h3 className="container text-center mt-5">loading...</h3>;
   }
 
-  function notFoundError() {
-    if (!filteredPokemon.length)
-      return <h3 className="container text-center mt-5">Not Found</h3>;
-  }
 
   return (
     <div>
@@ -77,7 +72,6 @@ const filteredPokemon = pokemonData.filter((pokemon) =>
         <h1 className="text-center mt-3">
           <b>Pokemon</b>
         </h1>
-
         <div className="text-center py-4">
           <input
             type="text"
@@ -87,15 +81,10 @@ const filteredPokemon = pokemonData.filter((pokemon) =>
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-
-        <ul className="container">
-          <div className="cards">
-            {filteredPokemon.map((currPokemon) => (
-              <PokemonInfo key={currPokemon.id} currPokemon={currPokemon} />
-            ))}
-          </div>
-          {notFoundError()}
-        </ul>
+        <TotalOrSort
+          filteredPokemon={filteredPokemon}
+        />
+       
       </div>
     </div>
   );

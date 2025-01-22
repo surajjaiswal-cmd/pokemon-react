@@ -25,6 +25,7 @@ body {
     height: 2rem;
     border-bottom: 0.1rem solid rgb(39, 155, 190);
     padding-left: .1rem;
+    padding-left: 1rem;
 }
 
 .cards {
