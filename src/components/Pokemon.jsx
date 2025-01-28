@@ -8,7 +8,7 @@ export function Pokemon() {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [gotop, setGotop] = useState(true);
-  const api = "https://pokeapi.co/api/v2/pokemon?limit=200";
+  const api = "https://pokeapi.co/api/v2/pokemon?limit=100";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +66,7 @@ export function Pokemon() {
       <a href="#">
         <button className={`btn go-up-side ${gotop ? "hide" : ""}`}>
           <i className="fa-solid fa-arrow-up"></i>
-        </button>{" "}
+        </button>
       </a>
       <div className="container-fluid">
         <h1 className="text-center mt-3">

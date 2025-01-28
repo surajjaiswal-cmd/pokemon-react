@@ -1,4 +1,6 @@
 export function PokemonInfo({ currPokemon }) {
+  // both functions ues to generate random color
+
   function generateRandomHexString() {
     let length = 6;
     const characters = "0123456789ABCDEF";
@@ -9,6 +11,16 @@ export function PokemonInfo({ currPokemon }) {
     }
     return result;
   }
+
+  // function generateRandomHexString() {
+  //   const length = 6;
+  //   const characters = "0123456789ABCDEF";
+  //   const resultArray = Array.from({ length }, () => {
+  //     const randomIndex = Math.floor(Math.random() * characters.length);
+  //     return characters.charAt(randomIndex);
+  //   });
+  //   return resultArray.join("");
+  // }
 
   return (
     <li className="card-info">
